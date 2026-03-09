@@ -481,11 +481,11 @@
     .mv-pair-section:last-child { margin-bottom:0;padding-bottom:0;border-bottom:none; }
     .mv-groups-wrap { display:flex;flex-wrap:wrap;gap:.5rem;align-items:flex-start;margin-top:.25rem; }
     .mv-group {
-      display:flex;flex-wrap:wrap;gap:4px;
+      display:flex;flex-wrap:wrap;gap:2px;
       padding:.35rem .4rem;border-radius:.5rem;border:2.5px solid;
     }
-    .mv-circle { width:16px;height:16px;border-radius:50%;flex-shrink:0; }
-    @media(max-width:640px){ .mv-circle { width:12px;height:12px; } }
+    .mv-circle { font-size:1.3rem;line-height:1;flex-shrink:0; }
+    @media(max-width:640px){ .mv-circle { font-size:1rem; } }
 
     .lock-btn {
       margin-top:.75rem;background:var(--purple);color:white;
@@ -1894,17 +1894,17 @@ setTimeout(fixStickyTops, 1200);
         const vis = document.getElementById('mt-visual');
         if (vis) {
           const palette = [
-            {bg:'#EDE9FE', border:'#7C3AED', dot:'#7C3AED'},
-            {bg:'#CCFBF1', border:'#0D9488', dot:'#0D9488'},
-            {bg:'#FEF3C7', border:'#D97706', dot:'#D97706'},
-            {bg:'#FFE4E6', border:'#E11D48', dot:'#E11D48'},
-            {bg:'#DCFCE7', border:'#16A34A', dot:'#16A34A'},
+            {bg:'#EDE9FE', border:'#7C3AED', emoji:'⭐'},
+            {bg:'#CCFBF1', border:'#0D9488', emoji:'🐢'},
+            {bg:'#FEF3C7', border:'#D97706', emoji:'🌻'},
+            {bg:'#FFE4E6', border:'#E11D48', emoji:'🍓'},
+            {bg:'#DCFCE7', border:'#16A34A', emoji:'🐸'},
           ];
-          let vhtml = '<div style="font-family:\'Fredoka\',sans-serif;font-size:1.1rem;font-weight:700;color:var(--purple);margin-bottom:.625rem;">🔵 Factor Groups for ' + target + '</div>';
+          let vhtml = '<div style="font-family:\'Fredoka\',sans-serif;font-size:1.1rem;font-weight:700;color:var(--purple);margin-bottom:.625rem;">Factor Groups for ' + target + '</div>';
           pairs.forEach(([r, c], idx) => {
             const p = palette[idx % palette.length];
-            const cols = Math.min(c, 6);
-            const gw = cols * 22 + 14; // max-width per group box in px
+            const cols = Math.min(c, 5);
+            const gw = cols * 34 + 16; // max-width per group box in px
             vhtml += '<div class="mv-pair-section">';
             vhtml += '<div style="font-family:\'Fredoka\',sans-serif;font-size:1rem;font-weight:700;color:' + p.border + ';">';
             vhtml += r + ' group' + (r !== 1 ? 's' : '') + ' of ' + c;
@@ -1913,7 +1913,7 @@ setTimeout(fixStickyTops, 1200);
             for (let g = 0; g < r; g++) {
               vhtml += '<div class="mv-group" style="border-color:' + p.border + ';background:' + p.bg + ';max-width:' + gw + 'px;">';
               for (let i = 0; i < c; i++) {
-                vhtml += '<div class="mv-circle" style="background:' + p.dot + ';"></div>';
+                vhtml += '<span class="mv-circle">' + p.emoji + '</span>';
               }
               vhtml += '</div>';
             }
