@@ -1893,14 +1893,17 @@ setTimeout(fixStickyTops, 1200);
         // ── RENDER FACTOR GROUP VISUAL ──
         const vis = document.getElementById('mt-visual');
         if (vis) {
+          const emojis = ['⭐','🐸','🌻','🍓','🐢','🦋','🍊','🐙','🌈','🦄','🍇','🐠',
+                          '🌺','🐧','🍄','🐝','🎈','🦊','🍉','🐳'];
+          const emoji = emojis[target % emojis.length];
           const palette = [
-            {bg:'#EDE9FE', border:'#7C3AED', emoji:'⭐'},
-            {bg:'#CCFBF1', border:'#0D9488', emoji:'🐢'},
-            {bg:'#FEF3C7', border:'#D97706', emoji:'🌻'},
-            {bg:'#FFE4E6', border:'#E11D48', emoji:'🍓'},
-            {bg:'#DCFCE7', border:'#16A34A', emoji:'🐸'},
+            {bg:'#EDE9FE', border:'#7C3AED'},
+            {bg:'#CCFBF1', border:'#0D9488'},
+            {bg:'#FEF3C7', border:'#D97706'},
+            {bg:'#FFE4E6', border:'#E11D48'},
+            {bg:'#DCFCE7', border:'#16A34A'},
           ];
-          let vhtml = '<div style="font-family:\'Fredoka\',sans-serif;font-size:1.1rem;font-weight:700;color:var(--purple);margin-bottom:.625rem;">Factor Groups for ' + target + '</div>';
+          let vhtml = '<div style="font-family:\'Fredoka\',sans-serif;font-size:1.1rem;font-weight:700;color:var(--purple);margin-bottom:.625rem;">Factor Groups for ' + target + ' ' + emoji + '</div>';
           pairs.forEach(([r, c], idx) => {
             const p = palette[idx % palette.length];
             const cols = Math.min(c, 5);
@@ -1913,7 +1916,7 @@ setTimeout(fixStickyTops, 1200);
             for (let g = 0; g < r; g++) {
               vhtml += '<div class="mv-group" style="border-color:' + p.border + ';background:' + p.bg + ';max-width:' + gw + 'px;">';
               for (let i = 0; i < c; i++) {
-                vhtml += '<span class="mv-circle">' + p.emoji + '</span>';
+                vhtml += '<span class="mv-circle">' + emoji + '</span>';
               }
               vhtml += '</div>';
             }
