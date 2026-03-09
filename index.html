@@ -762,9 +762,6 @@
           </div>
         </div>
 
-        <!-- Factor group visualization — filled by JS on cell click -->
-        <div id="mt-visual" style="display:none;"></div>
-
         <!-- The table wrapper — horizontally scrollable on small screens -->
         <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
           <table id="mult-table" style="border-collapse:collapse;margin:0 auto;font-family:'Lexend',sans-serif;">
@@ -790,6 +787,9 @@
             <span>Row &amp; column headers</span>
           </div>
         </div>
+
+        <!-- Factor group visualization — filled by JS on cell click -->
+        <div id="mt-visual" style="display:none;margin-top:1rem;"></div>
 
         <!-- Tee connection -->
         <div style="margin-top:1rem;background:#FFFBEB;border-left:4px solid var(--amber);border-radius:0 .75rem .75rem 0;padding:.875rem 1rem;font-size:1.1rem;">
@@ -1924,6 +1924,7 @@ setTimeout(fixStickyTops, 1200);
           });
           vis.innerHTML = vhtml;
           vis.style.display = 'block';
+          vis.scrollIntoView({behavior:'smooth', block:'nearest'});
         }
       }
     })();
