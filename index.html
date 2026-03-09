@@ -13,12 +13,11 @@
       --teal: #0D9488; --rose: #E11D48; --green: #16A34A;
       --text: #1C1917; --text2: #57534E; --border: #E7E5E4;
     }
-    html { font-size: 26px; scroll-behavior: smooth; }
+    html { font-size: clamp(16px, 1.6vw, 26px); scroll-behavior: smooth; }
     body {
       font-family: 'Lexend', sans-serif;
       background: var(--bg); color: var(--text); line-height: 1.6;
       margin: 0;
-      font-size: 26px;
     }
     body.dyslexia { font-family: serif; letter-spacing: 0.06em; line-height: 2.1; }
     .fd { font-family: 'Fredoka', sans-serif; }
