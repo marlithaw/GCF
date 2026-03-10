@@ -486,6 +486,15 @@
     }
     .mv-circle { font-size:1.3rem;line-height:1;flex-shrink:0; }
     @media(max-width:640px){ .mv-circle { font-size:1rem; } }
+    /* Common Factor Spotter */
+    .cf-chip { padding:.35rem .7rem;border-radius:2rem;border:2px solid #DDD6FE;background:white;font-size:1.1rem;font-weight:700;cursor:pointer;font-family:'Lexend',sans-serif;transition:all .2s; }
+    .cf-chip:hover { border-color:#7C3AED;background:#F5F3FF; }
+    .cf-chip.cf-match { background:#FDE68A;border-color:#F59E0B;transform:scale(1.12); }
+    .cf-chip.cf-solo  { background:#FEE2E2;border-color:#FCA5A5;opacity:.65; }
+    /* Factor Explorer */
+    .fe-pick { padding:.5rem 1.25rem;border-radius:2rem;border:2px solid #DDD6FE;background:white;font-size:1.15rem;font-weight:700;cursor:pointer;font-family:'Lexend',sans-serif;color:var(--purple);transition:all .2s; }
+    .fe-pick:hover { background:#F5F3FF;border-color:#7C3AED; }
+    .fe-pick.fe-active { background:var(--purple);color:white;border-color:var(--purple); }
 
     .lock-btn {
       margin-top:.75rem;background:var(--purple);color:white;
@@ -897,11 +906,27 @@
 
       <!-- Morgan GCF -->
       <div class="card">
-        <h3 class="fd" style="font-size:1.25rem;font-weight:700;color:var(--teal);margin-bottom:.75rem;">🚦 Morgan Method: Finding GCF</h3>
+        <h3 class="fd" style="font-size:1.3rem;font-weight:700;color:var(--teal);margin-bottom:.4rem;">🚦 Morgan Method: Finding GCF</h3>
+        <p style="color:var(--text2);font-size:1.1rem;margin-bottom:1rem;">Same 3-color system — now applied to TWO numbers. Find what they share, then pick the greatest.</p>
         <div class="morgan">
-          <div class="m-step m-stop"><div class="m-light l-stop">✋</div><div><h4 style="color:#DC2626;">STOP – Write Both Numbers</h4><p>Example: 12 and 18. Write them clearly at the top.</p></div></div>
-          <div class="m-step m-caution"><div class="m-light l-caution">⚠️</div><div><h4 style="color:#B45309;">CAUTION – List ALL Factors of Each</h4><p>12: 1,2,3,4,6,12 &nbsp;|&nbsp; 18: 1,2,3,6,9,18. Circle what's in BOTH lists.</p></div></div>
-          <div class="m-step m-go"><div class="m-light l-go">✅</div><div><h4 style="color:#15803D;">GO – Pick the Greatest</h4><p>Common factors: 1,2,3,6. The greatest? <strong>GCF = 6 ✓</strong></p></div></div>
+          <div class="m-step m-stop">
+            <div class="m-light l-stop">🔴</div>
+            <div class="m-word">STOP</div>
+            <h4>Write Both Numbers</h4>
+            <p>Write them clearly at the top. Example: 12 and 18. Don't rush in — this sets up everything.</p>
+          </div>
+          <div class="m-step m-caution">
+            <div class="m-light l-caution">🟡</div>
+            <div class="m-word">CAUTION</div>
+            <h4>List ALL Factors of Each</h4>
+            <p>Use the Factor Ladder for both numbers. Write every pair. Don't stop early — you might miss the GCF!</p>
+          </div>
+          <div class="m-step m-go">
+            <div class="m-light l-go">🟢</div>
+            <div class="m-word">GO</div>
+            <h4>Pick the Greatest Common One</h4>
+            <p>Circle what appears in BOTH lists. The biggest circled number is your GCF. ✓</p>
+          </div>
         </div>
       </div>
 
@@ -928,6 +953,26 @@
           <span style="background:#FDE68A;padding:2px 8px;border-radius:3px;font-weight:600;font-size:1.15rem;">Common:</span>
           &nbsp;1, 2, 3, <strong>6</strong> &nbsp;→&nbsp; <strong style="color:var(--purple);font-size:1.1rem;">GCF = 6</strong>
         </div>
+      </div>
+
+      <!-- ── COMMON FACTOR SPOTTER ── -->
+      <div class="card" style="background:#F0FDF4;border:3px solid #6EE7B7;margin-top:1.25rem;">
+        <h3 class="fd" style="font-size:1.25rem;font-weight:700;color:var(--teal);margin-bottom:.4rem;">🎯 Common Factor Spotter</h3>
+        <p style="font-size:1rem;color:var(--text2);margin-bottom:.875rem;">Tap any number from either list. If it's a <strong>common factor</strong>, it lights up gold on both sides. Find them all to reveal the GCF!</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:.875rem;">
+          <div style="flex:1;min-width:130px;">
+            <div style="text-align:center;background:#7C3AED;color:white;border-radius:.6rem .6rem 0 0;padding:.5rem .75rem;font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.05rem;">Factors of 12</div>
+            <div id="cf-a" style="display:flex;flex-wrap:wrap;gap:.4rem;padding:.75rem;background:white;border:2px solid #DDD6FE;border-radius:0 0 .6rem .6rem;justify-content:center;min-height:52px;"></div>
+          </div>
+          <div style="flex:1;min-width:130px;">
+            <div style="text-align:center;background:#0D9488;color:white;border-radius:.6rem .6rem 0 0;padding:.5rem .75rem;font-family:'Fredoka',sans-serif;font-weight:700;font-size:1.05rem;">Factors of 18</div>
+            <div id="cf-b" style="display:flex;flex-wrap:wrap;gap:.4rem;padding:.75rem;background:white;border:2px solid #99F6E4;border-radius:0 0 .6rem .6rem;justify-content:center;min-height:52px;"></div>
+          </div>
+        </div>
+        <div id="cf-result" style="display:none;text-align:center;padding:.875rem 1rem;background:white;border:2px solid #6EE7B7;border-radius:.75rem;margin-bottom:.625rem;">
+          <span style="font-size:1.2rem;font-family:'Fredoka',sans-serif;color:var(--teal);">🏆 Common factors: <strong id="cf-common"></strong> &nbsp;→&nbsp; GCF = <strong id="cf-gcf" style="color:var(--purple);font-size:1.35rem;"></strong></span>
+        </div>
+        <button onclick="resetCF()" style="background:#F3F4F6;border:1.5px solid #D1D5DB;border-radius:2rem;padding:.4rem 1.25rem;cursor:pointer;font-family:'Lexend',sans-serif;font-size:1rem;">🔄 Reset</button>
       </div>
 
       <div class="ritual r-bake" style="margin:1.75rem 0 1rem;">🍞 Bake It – Practice</div>
@@ -1019,6 +1064,32 @@
         <div class="char-speech lee-bubble" style="flex:1;">"Tee told me something at recess: 'Bigger numbers act loud, but the method never changes. STOP. CAUTION. GO. Don't panic, just list.' Same game, more players."</div>
       </div>
 
+      <!-- Morgan Method – Day 3 -->
+      <div class="card">
+        <h3 class="fd" style="font-size:1.3rem;font-weight:700;color:var(--teal);margin-bottom:.4rem;">🚦 Same Method. Bigger Numbers.</h3>
+        <p style="color:var(--text2);font-size:1.1rem;margin-bottom:1rem;">The Morgan Method doesn't change — only the numbers get bigger. Stay patient and list every factor pair.</p>
+        <div class="morgan">
+          <div class="m-step m-stop">
+            <div class="m-light l-stop">🔴</div>
+            <div class="m-word">STOP</div>
+            <h4>Write Both Numbers</h4>
+            <p>Even with big numbers, write them clearly first. Set up your workspace before you start listing.</p>
+          </div>
+          <div class="m-step m-caution">
+            <div class="m-light l-caution">🟡</div>
+            <div class="m-word">CAUTION</div>
+            <h4>List ALL Factors — Don't Stop Early</h4>
+            <p>Bigger numbers have more factors. Use the ladder: 1 × the number, then 2, 3, 4... keep going until pairs repeat.</p>
+          </div>
+          <div class="m-step m-go">
+            <div class="m-light l-go">🟢</div>
+            <div class="m-word">GO</div>
+            <h4>Find the Greatest Common Factor</h4>
+            <p>Circle numbers in BOTH lists. The biggest one is the GCF. Double-check it divides both evenly.</p>
+          </div>
+        </div>
+      </div>
+
       <div class="example-box">
         <p style="font-weight:700;color:var(--purple);margin-bottom:.875rem;font-size:1.05rem;">Worked Example: GCF of 16 and 24</p>
         <div class="two-col" style="margin-bottom:.875rem;">
@@ -1042,6 +1113,20 @@
           <span style="background:#FDE68A;padding:2px 8px;border-radius:3px;font-weight:600;font-size:1.15rem;">Common:</span>
           &nbsp;1, 2, 4, <strong>8</strong> &nbsp;→&nbsp; <strong style="color:var(--purple);font-size:1.1rem;">GCF = 8</strong>
         </div>
+      </div>
+
+      <!-- ── FACTOR EXPLORER ── -->
+      <div class="card" style="background:#F5F3FF;border:3px solid #DDD6FE;margin-top:1.25rem;">
+        <h3 class="fd" style="font-size:1.25rem;font-weight:700;color:var(--purple);margin-bottom:.4rem;">🔭 Factor Explorer</h3>
+        <p style="font-size:1rem;color:var(--text2);margin-bottom:.875rem;">Pick a number to see all its factor pairs as emoji groups — just like the multiplication table!</p>
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;">
+          <button class="fe-pick" onclick="buildFE(24)">24</button>
+          <button class="fe-pick" onclick="buildFE(36)">36</button>
+          <button class="fe-pick" onclick="buildFE(48)">48</button>
+          <button class="fe-pick" onclick="buildFE(60)">60</button>
+          <button class="fe-pick" onclick="buildFE(72)">72</button>
+        </div>
+        <div id="fe-visual" style="display:none;"></div>
       </div>
 
       <div class="ritual r-bake" style="margin:1.75rem 0 1rem;">🍞 Bake It – Practice</div>
@@ -1928,6 +2013,103 @@ setTimeout(fixStickyTops, 1200);
         }
       }
     })();
+
+    // ── COMMON FACTOR SPOTTER (Day 2) ──
+    (function() {
+      const factorsA = [1,2,3,4,6,12];
+      const factorsB = [1,2,3,6,9,18];
+      const common = factorsA.filter(f => factorsB.includes(f));
+
+      function buildChips(id, factors) {
+        const wrap = document.getElementById(id);
+        if (!wrap) return;
+        factors.forEach(f => {
+          const btn = document.createElement('button');
+          btn.className = 'cf-chip';
+          btn.textContent = f;
+          btn.dataset.val = f;
+          btn.onclick = () => tapChip(f);
+          wrap.appendChild(btn);
+        });
+      }
+
+      function tapChip(val) {
+        const isCommon = common.includes(val);
+        ['#cf-a button','#cf-b button'].forEach(sel => {
+          document.querySelectorAll(sel).forEach(btn => {
+            if (parseInt(btn.dataset.val) === val) {
+              if (isCommon) {
+                btn.classList.toggle('cf-match');
+                btn.classList.remove('cf-solo');
+              } else {
+                btn.classList.toggle('cf-solo');
+                btn.classList.remove('cf-match');
+              }
+            }
+          });
+        });
+        const matched = new Set();
+        document.querySelectorAll('#cf-a .cf-match').forEach(b => matched.add(parseInt(b.dataset.val)));
+        if (matched.size === common.length) {
+          const sorted = Array.from(matched).sort((a,b)=>a-b);
+          document.getElementById('cf-common').textContent = sorted.join(', ');
+          document.getElementById('cf-gcf').textContent = Math.max(...sorted);
+          const res = document.getElementById('cf-result');
+          res.style.display = 'block';
+          res.scrollIntoView({behavior:'smooth', block:'nearest'});
+        }
+      }
+
+      window.resetCF = function() {
+        document.querySelectorAll('#cf-a button, #cf-b button').forEach(b => b.classList.remove('cf-match','cf-solo'));
+        document.getElementById('cf-result').style.display = 'none';
+      };
+
+      buildChips('cf-a', factorsA);
+      buildChips('cf-b', factorsB);
+    })();
+
+    // ── FACTOR EXPLORER (Day 3) ──
+    window.buildFE = function(n) {
+      const pairs = [];
+      for (let r = 1; r * r <= n; r++) {
+        if (n % r === 0) pairs.push([r, n / r]);
+      }
+      const emojis = ['⭐','🐸','🌻','🍓','🐢','🦋','🍊','🐙','🌈','🦄','🍇','🐠','🌺','🐧','🍄','🐝','🎈','🦊','🍉','🐳'];
+      const emoji = emojis[n % emojis.length];
+      const palette = [
+        {bg:'#EDE9FE',border:'#7C3AED'},{bg:'#CCFBF1',border:'#0D9488'},
+        {bg:'#FEF3C7',border:'#D97706'},{bg:'#FFE4E6',border:'#E11D48'},
+        {bg:'#DCFCE7',border:'#16A34A'}
+      ];
+      document.querySelectorAll('.fe-pick').forEach(b => {
+        b.classList.toggle('fe-active', parseInt(b.textContent) === n);
+      });
+      let html = '<div style="font-family:'Fredoka',sans-serif;font-size:1.1rem;font-weight:700;color:var(--purple);margin-bottom:.625rem;">Factor groups for ' + n + ' ' + emoji + ' — ' + pairs.length + ' pair' + (pairs.length !== 1 ? 's' : '') + '</div>';
+      pairs.forEach(([r, c], idx) => {
+        const p = palette[idx % palette.length];
+        const cols = Math.min(c, 5);
+        const gw = cols * 34 + 16;
+        html += '<div class="mv-pair-section">';
+        html += '<div style="font-family:'Fredoka',sans-serif;font-size:1rem;font-weight:700;color:' + p.border + ';">';
+        html += r + ' group' + (r !== 1 ? 's' : '') + ' of ' + c;
+        html += ' <span style="font-weight:400;color:#9CA3AF;font-family:'Lexend',sans-serif;font-size:.85rem;">(' + r + ' × ' + c + ' = ' + n + ')</span>';
+        html += '</div><div class="mv-groups-wrap">';
+        for (let g = 0; g < r; g++) {
+          html += '<div class="mv-group" style="border-color:' + p.border + ';background:' + p.bg + ';max-width:' + gw + 'px;">';
+          for (let i = 0; i < c; i++) html += '<span class="mv-circle">' + emoji + '</span>';
+          html += '</div>';
+        }
+        html += '</div></div>';
+      });
+      const allF = new Set(); pairs.forEach(([r,c]) => { allF.add(r); allF.add(c); });
+      const sorted = Array.from(allF).sort((a,b)=>a-b);
+      html += '<div style="margin-top:.75rem;padding:.625rem .875rem;background:white;border-radius:.5rem;border:1.5px solid #DDD6FE;"><span style="font-weight:700;color:var(--purple);">Factors of ' + n + ': </span><span style="color:var(--text2);">' + sorted.join(', ') + '</span></div>';
+      const vis = document.getElementById('fe-visual');
+      vis.innerHTML = html;
+      vis.style.display = 'block';
+      vis.scrollIntoView({behavior:'smooth', block:'nearest'});
+    };
 
     </script>
 </body>
